@@ -6,7 +6,7 @@
     <div class="sos_div content-div">
         <div class="title">
             <h2>Discussion</h2>
-            <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
+            <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?>
         </div>
         <div class="info">
             <div class="heading">
@@ -31,10 +31,10 @@
             <div class="option-menu">
                 <nav class="options">
                     <ul>
-                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?></li>
 
-                        <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?></li>
                     </ul>
                 </nav>
 
@@ -44,7 +44,7 @@
     <?php foreach ($comments as $comment) {?>                       
         <div class="sos_div content-div">
             <div class="title">
-                <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
+                <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?>
             </div>
             <div class="info">
                 <div class="heading diff_heading">
@@ -70,10 +70,10 @@
                 <div class="option-menu">
                     <nav class="options">
                         <ul>
-                            <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                            <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?></li>
 
-                            <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                            <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                            <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?></li>
+                            <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'juniors', 'action' => 'index'))); ?></li>
                         </ul>
                     </nav>
 
