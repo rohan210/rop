@@ -1,7 +1,7 @@
 <?php
 class FashionsController extends AppController {
     var $name = 'Fashions';
-    var $components = array('Auth','Session');
+    var $components = array('Session','Authsome');
     var $helpers = array('Html', 'Form');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';
@@ -16,6 +16,29 @@ class FashionsController extends AppController {
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_to'] = 'fashion';
                 $data['PostDetail']['status'] = 'active';
+                pr($data);
+                //$this->PostDetail->save($data);
+            }
+        }
+    }
+    
+    public function add_comment() {
+        //pr($this->Session);
+        //echo $userId = $this->Authsome->get('id');
+        $this->render(false);
+        if (!empty($this->data)) {
+            $this->Post->create();
+            $this->data['Post'] = $this->data['Comment'];
+            //pr($this->data);
+            if ($this->Post->save($this->data)) {
+                $postId = $this->Post->getInsertId();
+                $data['PostDetail']['type'] = 'comment';
+                $data['PostDetail']['post_id'] = $postId;
+                $data['PostDetail']['related_id'] = $this->data['Post']['post_id'];
+                
+                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['status'] = 'active';
+                pr($data);
                 $this->PostDetail->save($data);
             }
         }
@@ -103,7 +126,7 @@ class FashionsController extends AppController {
     }
 
     public function view($id) {
-
+        
         $post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
         $this->set('post', $post);
         $comments = $this->Post->find('all', array('conditions' => array('type' => 'comment', 'PostDetail.related_id' => $id)));

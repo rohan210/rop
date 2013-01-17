@@ -6,7 +6,12 @@
 class Post extends AppModel {
 var $name = 'Post';
 var $hasOne ='PostDetail';
-var $belongsTo = 'User';
+ public $belongsTo = array(
+        'User' => array(
+            'className'    => 'SparkPlug.User',
+            'foreignKey'   => 'user_id'
+        )
+    );
     
 }
 ?>

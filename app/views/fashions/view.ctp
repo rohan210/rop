@@ -84,7 +84,16 @@
     <?php }
     ?>
     <div class="add-comment">
-        <textarea></textarea>
-        <input type="button" class="button" value="Post a comment">
+        <?php
+        $userId = Authsome::get('id');
+        echo $form->create('Comment', array('url' => array('controller' => 'fashions', 'action' => 'add_comment')));
+        echo $form->hidden('post_id', array('value' => $post['Post']['id']));
+        echo $form->hidden('topic', array('value' => $post['Post']['topic']));
+        echo $form->hidden('user_id', array('value' => $userId));
+
+        echo $form->input('post', array('type' => 'textarea', 'div' => false, 'label' => false));
+
+        echo $form->submit("Comment", array('class' => 'button', 'div' => false));
+        ?>
     </div>
 </div>

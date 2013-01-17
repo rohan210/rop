@@ -35,5 +35,19 @@
  */
 class AppController extends Controller {
 
-    
+    var $components = array('Session', 'SparkPlug.Authsome' => array('model' => 'User'));
+    var $uses = array('SparkPlug.UserGroup');
+
+    function beforeFilter() {
+        parent::beforeFilter();
+        SparkPlugIt($this);
+//        $this->Auth->authorize = 'controller';
+//        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+//        $this->Auth->loginRedirect = array('controller' => 'users', 'action' => 'index');
+//        $this->Auth->logoutRedirect = '/';
+    }
+
+//    function isAuthorized() {
+//        return true;
+//    }
 }
