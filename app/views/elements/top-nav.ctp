@@ -1,5 +1,6 @@
 <div class="page-title">
     <?php
+    
     if (isset($type)) {
         switch ($type) {
             case "discussion" :
@@ -13,6 +14,8 @@
                 break;
             case "sos":
                 echo $this->Html->link('<h2>send SOS</h2>', array('action' => 'add_sos'), array('escape' => false));
+                break;
+            default :
                 break;
         }
     }

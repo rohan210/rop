@@ -20,12 +20,115 @@ class EmotionsController extends AppController {
             }
         }
     }
+    public function add_news() {
+        if (!empty($this->data)) {
+            $this->Post->create();
+            $this->data['Post'] = $this->data['Emotion'];
+            if ($this->Post->save($this->data)) {
+                $postId = $this->Post->getInsertId();
+                $data['PostDetail']['type'] = 'news';
+                $data['PostDetail']['post_id'] = $postId;
+                $data['PostDetail']['related_to'] = 'emotion';
+                $data['PostDetail']['status'] = 'active';
+                $this->PostDetail->save($data);
+            }
+        }
+    }
+    
+    public function add_sos() {
+        if (!empty($this->data)) {
+            $this->Post->create();
+            $this->data['Post'] = $this->data['Emotion'];
+            if ($this->Post->save($this->data)) {
+                $postId = $this->Post->getInsertId();
+                $data['PostDetail']['type'] = 'sos';
+                $data['PostDetail']['post_id'] = $postId;
+                $data['PostDetail']['related_to'] = 'emotion';
+                $data['PostDetail']['status'] = 'active';
+                $this->PostDetail->save($data);
+            }
+        }
+    }
+    
+    public function add_expert_advice() {
+        if (!empty($this->data)) {
+            $this->Post->create();
+            $this->data['Post'] = $this->data['Emotion'];
+            if ($this->Post->save($this->data)) {
+                $postId = $this->Post->getInsertId();
+                $data['PostDetail']['type'] = 'advice';
+                $data['PostDetail']['post_id'] = $postId;
+                $data['PostDetail']['related_to'] = 'emotion';
+                $data['PostDetail']['status'] = 'active';
+                $this->PostDetail->save($data);
+            }
+        }
+    }
+
 
     public function index() {
         $this->layout = 'three-column';
-        $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'emotion')));
+       // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'emotion')));
+        $this->paginate = array(
+        'conditions' => array('PostDetail.related_to' => 'emotion'),
+        'limit' =>6
+    );
+      $posts = $this->paginate('Post');
+        $this->set('posts', $posts);
+    }
+
+    public function discussions() {
+        $this->layout = 'three-column';
+       // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'discussion')));
+        $this->paginate = array(
+        'conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'discussion'),
+            'limit' =>4
+            );
+        
+           $posts = $this->paginate('Post');
 
         $this->set('posts', $posts);
+        $this->set('type', 'discussion');
+    }
+    
+    public function news() {
+        $this->layout = 'three-column';
+       // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'news')));
+        $this->paginate = array(
+        'conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'news'),
+            'limit' =>4
+            );
+        
+           $posts = $this->paginate('Post');
+
+        $this->set('posts', $posts);
+        $this->set('type', 'news');
+    }
+    public function SOS() {
+        $this->layout = 'three-column';
+       // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'sos')));
+        $this->paginate = array(
+        'conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'sos'),
+            'limit' =>4
+            );
+        
+           $posts = $this->paginate('Post');
+
+        $this->set('posts', $posts);
+        $this->set('type', 'sos');
+    }
+    public function expert_advice() {
+        $this->layout = 'three-column';
+       // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'advice')));
+        $this->paginate = array(
+        'conditions' => array('PostDetail.related_to' => 'emotion','PostDetail.type' => 'advice'),
+            'limit' =>4
+            );
+        
+           $posts = $this->paginate('Post');
+
+        $this->set('posts', $posts);
+        $this->set('type', 'advice');
     }
 
     public function view($id) {

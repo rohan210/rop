@@ -8,7 +8,7 @@ foreach ($posts as $post) {
             <h2>Discussion</h2>
             <?php 
             
-            echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); 
+            echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'seniors', 'action' => 'index'))); 
             ?>
 
         </div>
@@ -34,10 +34,10 @@ foreach ($posts as $post) {
             <div class="option-menu">
                 <nav class="options">
                     <ul>
-                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php echo $this->Html->image("icon-02.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("icon-02.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
                     </ul>
                 </nav>
 
@@ -52,7 +52,7 @@ foreach ($posts as $post) {
     <div class="title">
         <h2>Expert Advice</h2>
 
-<?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
+<?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?>
     </div>
     <div class="info">
         <div class="heading">
@@ -93,16 +93,16 @@ foreach ($posts as $post) {
         <div class="option-menu">
             <nav class="options">
                 <ul>
-                    <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></a>
+                    <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></a>
                         <ul class="points">
                             <li>
                                 <a href="#"><span>23 Comments</span></a>
                             </li>
                         </ul>
                     </li>
-                    <li><?php echo $this->Html->image("icon-02.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                    <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                    <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                    <li><?php echo $this->Html->image("icon-02.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
+                    <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
+                    <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'seniors', 'action' => 'index'))); ?></li>
                 </ul>
             </nav>
 
@@ -110,3 +110,26 @@ foreach ($posts as $post) {
     </div>
 </div>
 -->
+<table class="list">
+                        <thead>
+                            <tr>
+                                <td class="left" width="20px">
+                                    
+                                <td class="center">
+ 
+    <?php echo $this->Paginator->prev(' << ' . __('Previous'), array(), null, array('class' => 'prev disabled'));?>   
+               
+               ||
+               
+    <?php echo $this->Paginator->numbers(array('first' => 'First page'));?>                
+                
+               ||
+      
+     
+    <?php echo $this->Paginator->next(' >> ' . __('Next'), array(), null, array('class' => 'next disabled'));?>
+               
+</td>
+                    
+                </tr>
+            </thead>
+</table>

@@ -107,3 +107,26 @@ foreach ($posts as $post) {
     </div>
 </div>
 -->
+<table class="list">
+                        <thead>
+                            <tr>
+                                <td class="left" width="20px">
+                                    
+                                <td class="center">
+ 
+    <?php echo $this->Paginator->prev(' << ' . __('Previous'), array(), null, array('class' => 'prev disabled'));?>   
+               
+               ||
+               
+    <?php echo $this->Paginator->numbers(array('first' => 'First page'));?>                
+                
+               ||
+      
+     
+    <?php echo $this->Paginator->next(' >> ' . __('Next'), array(), null, array('class' => 'next disabled'));?>
+               
+</td>
+                    
+                </tr>
+            </thead>
+</table>
