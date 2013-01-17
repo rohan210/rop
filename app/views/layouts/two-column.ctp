@@ -50,8 +50,8 @@
                     <div class="widget_195">
                         <div class="top-info">
                             <?php echo $this->Html->image("small-profile.jpg"); ?>
-                            <p><?php echo $this->Session->read('Auth.User.name'); ?></p>
-                            <span><?php echo $this->Session->read('Auth.User.role'); ?></span>
+                            <p><?php echo $this->Session->read('User.User.username'); ?></p>
+                            <span><?php echo $this->Session->read('User.User.role'); ?></span>
                         </div>
                     </div>
                     <?php echo $content_for_layout ?>
