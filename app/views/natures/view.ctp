@@ -5,7 +5,7 @@
 <div class="widget_804">
     <div class="sos_div content-div">
         <div class="title">
-            <h2>Discussion</h2>
+            <h2><?php echo $post['PostDetail']['type'];?></h2>
             <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'natures', 'action' => 'index'))); ?>
         </div>
         <div class="info">
@@ -83,4 +83,17 @@
 
     <?php }
     ?>
+    <div class="add-comment">
+        <?php
+        
+        echo $form->create('Comment', array('url' => array('controller' => 'natures', 'action' => 'add_comment')));
+        echo $form->hidden('post_id', array('value' => $post['Post']['id']));
+        echo $form->hidden('topic', array('value' => $post['Post']['topic']));
+        echo $form->hidden('user_id', array('value' => $this->Session->read('User.User.id')));
+
+        echo $form->input('post', array('type' => 'textarea', 'div' => false, 'label' => false));
+
+        echo $form->submit("Comment", array('class' => 'button', 'div' => false));
+        ?>
+    </div>
 </div>
