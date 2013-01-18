@@ -46,6 +46,7 @@ class FashionsController extends AppController {
                 $data['PostDetail']['status'] = 'active';
                // pr($data);
                 $this->PostDetail->save($data);
+                $this->redirect(array('action' => 'view',$data['PostDetail']['related_id']));
             }
         }
     }
@@ -205,6 +206,7 @@ class FashionsController extends AppController {
         $this->PostDetail->saveField('heartbeats',$beats);
         $this->set('id',$postId);
         $this->set('beats',$beats);
+        
     }
 
 }
