@@ -46,7 +46,7 @@ $(".drop-down").attr('id', '');
     <div class="sos_div content-div">
 
         <div class="title">
-            <h2>Discussion</h2>
+            <h2><?php echo $post['PostDetail']['type'];?></h2>
             <div>
             <?php
             $id=$this->Session->read('User.User.id');

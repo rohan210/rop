@@ -2,10 +2,15 @@
 class EducationsController extends AppController {
     var $name = 'Educations';
     var $components = array('Authsome','Session');
-    var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form','Js' => array('Jquery'),'Text');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->set('type',"");
+    }
+    
     public function add_discussion() {
         if (!empty($this->data)) {
             $this->Post->create();
@@ -34,10 +39,11 @@ class EducationsController extends AppController {
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_id'] = $this->data['Post']['post_id'];
                 
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'education';
                 $data['PostDetail']['status'] = 'active';
                // pr($data);
                 $this->PostDetail->save($data);
+                $this->redirect(array('action' => 'view',$data['PostDetail']['related_id']));
             }
         }
     }
@@ -77,7 +83,7 @@ public function add_news() {
             $this->data['Post'] = $this->data['Education'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
-                $data['PostDetail']['type'] = 'advice';
+                $data['PostDetail']['type'] = 'expert advice';
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_to'] = 'education';
                 $data['PostDetail']['status'] = 'active';
@@ -91,7 +97,7 @@ public function add_news() {
         $this->layout = 'three-column';
       //  $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'education')));
          $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'education'),
+        'conditions' => array('PostDetail.related_to' => 'education','PostDetail.type !='=>'comment'),
         'limit' =>6
     );
       $posts = $this->paginate('Post');
@@ -145,14 +151,14 @@ public function add_news() {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'education','PostDetail.type' => 'advice')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'education','PostDetail.type' => 'advice'),
+        'conditions' => array('PostDetail.related_to' => 'education','PostDetail.type' => 'expert advice'),
             'limit' =>4
             );
         
            $posts = $this->paginate('Post');
 
         $this->set('posts', $posts);
-        $this->set('type', 'advice');
+        $this->set('type', 'expert advice');
     }
     public function view($id) {
 

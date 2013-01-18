@@ -1,5 +1,5 @@
 <div class="widget_804">
-    <h1>Add Discussion</h1>
+    <h1>Add Expert Advice</h1>
     <div class="sos_div content-div">
         <?php echo $form->create('Gossip', array('action' => 'add_expert_advice')); ?>
         <div class="title">

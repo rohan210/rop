@@ -5,7 +5,7 @@ foreach ($posts as $post) {
     <div class="sos_div">
         
         <div class="title">
-            <h2>SOS</h2>
+            <h2><?php echo $post['PostDetail']['type'];?></h2>
             <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'cookings', 'action' => 'index'))); ?>
 
         </div>
