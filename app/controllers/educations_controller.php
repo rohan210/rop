@@ -20,6 +20,27 @@ class EducationsController extends AppController {
             }
         }
     }
+    public function add_comment() {
+        //pr($this->Session);
+        //echo $userId = $this->Authsome->get('id');
+        $this->render(false);
+        if (!empty($this->data)) {
+            $this->Post->create();
+            $this->data['Post'] = $this->data['Comment'];
+            //pr($this->data);
+            if ($this->Post->save($this->data)) {
+                $postId = $this->Post->getInsertId();
+                $data['PostDetail']['type'] = 'comment';
+                $data['PostDetail']['post_id'] = $postId;
+                $data['PostDetail']['related_id'] = $this->data['Post']['post_id'];
+                
+                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['status'] = 'active';
+               // pr($data);
+                $this->PostDetail->save($data);
+            }
+        }
+    }
 public function add_news() {
         if (!empty($this->data)) {
             $this->Post->create();

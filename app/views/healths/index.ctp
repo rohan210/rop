@@ -67,7 +67,7 @@ $(".drop-down").attr('id', '');
     <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                 <div class="inner-heading">
                     <div class="left">
-                        <p><?php echo $post['User']['name']; ?></p>
+                        <p><?php echo $post['User']['username']; ?></p>
                         <span><?php echo $post['User']['role']; ?></span>
                     </div>
                     <div class="right">

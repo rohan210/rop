@@ -85,11 +85,11 @@
     ?>
     <div class="add-comment">
         <?php
-        $userId = Authsome::get('id');
+        
         echo $form->create('Comment', array('url' => array('controller' => 'fashions', 'action' => 'add_comment')));
         echo $form->hidden('post_id', array('value' => $post['Post']['id']));
         echo $form->hidden('topic', array('value' => $post['Post']['topic']));
-        echo $form->hidden('user_id', array('value' => $userId));
+        echo $form->hidden('user_id', array('value' => $this->Session->read('User.User.id')));
 
         echo $form->input('post', array('type' => 'textarea', 'div' => false, 'label' => false));
 
