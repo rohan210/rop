@@ -5,7 +5,7 @@
 <div class="widget_804">
     <div class="sos_div content-div">
         <div class="title">
-            <h2>Discussion</h2>
+            <h2><?php echo $post['PostDetail']['type'];?></h2>
             <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
         </div>
         <div class="info">
@@ -13,7 +13,7 @@
                 <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                 <div class="inner-heading">
                     <div class="left">
-                        <p><?php echo $post['User']['name'] ?></p>
+                        <p><?php echo $post['User']['username'] ?></p>
                         <span><?php echo $post['User']['role'] ?></span>
                     </div>
                     <div class="right">
@@ -51,7 +51,7 @@
                     <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                     <div class="inner-heading">
                         <div class="left">
-                            <p><?php echo $comment['User']['name']; ?>&nbsp<span>,<?php echo $comment['User']['role']; ?></span></p>
+                            <p><?php echo $comment['User']['username']; ?>&nbsp<span>,<?php echo $comment['User']['role']; ?></span></p>
 
                         </div>
                         <div class="right">

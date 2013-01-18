@@ -5,7 +5,7 @@ foreach ($posts as $post) {
     <div class="sos_div content-div">
         
         <div class="title">
-            <h2>Discussion</h2>
+            <h2><?php echo $post['PostDetail']['type'];?></h2>
             <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
 
         </div>
@@ -15,7 +15,7 @@ foreach ($posts as $post) {
                 <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                 <div class="inner-heading">
                     <div class="left">
-                        <p><?php echo $post['User']['name'];?></p>
+                        <p><?php echo $post['User']['username'];?></p>
                         <span><?php echo $post['User']['role'];?></span>
                     </div>
                     <div class="right">

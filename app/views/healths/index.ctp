@@ -49,7 +49,7 @@ $(".drop-down").attr('id', '');
             <h2>Discussion</h2>
             <div>
             <?php
-            $id=$this->Session->read('Auth.User.id');
+            $id=$this->Session->read('User.User.id');
             if ($post['Post']['user_id'] == $id) {
                 
                 echo $this->Html->image("drop-down.png", array("alt" => "drop",'class'=>'drop-down' ,'url' =>"#"));

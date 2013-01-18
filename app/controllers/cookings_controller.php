@@ -1,7 +1,7 @@
 <?php
 class CookingsController extends AppController {
     var $name = 'Cookings';
-    var $components = array('Auth','Session');
+    var $components = array('Authsome','Session');
     var $helpers = array('Html', 'Form');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';

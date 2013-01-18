@@ -1,7 +1,7 @@
 <?php
 class JuniorsController extends AppController {
     var $name = 'Juniors';
-    var $components = array('Auth','Session');
+    var $components = array('Authsome','Session');
     var $helpers = array('Html', 'Form');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';
@@ -14,7 +14,7 @@ class JuniorsController extends AppController {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'discussion';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'junior';
+                $data['PostDetail']['related_to'] = 'juniors';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -29,7 +29,7 @@ class JuniorsController extends AppController {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'news';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'junior';
+                $data['PostDetail']['related_to'] = 'juniors';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -44,7 +44,7 @@ class JuniorsController extends AppController {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'sos';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'junior';
+                $data['PostDetail']['related_to'] = 'juniors';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -59,7 +59,7 @@ class JuniorsController extends AppController {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'advice';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'junior';
+                $data['PostDetail']['related_to'] = 'juniors';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -71,7 +71,7 @@ class JuniorsController extends AppController {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior')));
          $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'junior'),
+        'conditions' => array('PostDetail.related_to' => 'juniors'),
         'limit' =>6
     );
       $posts = $this->paginate('Post');
@@ -82,7 +82,7 @@ class JuniorsController extends AppController {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'discussion')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'discussion'),
+        'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type' => 'discussion'),
             'limit' =>4
             );
         
@@ -96,7 +96,7 @@ class JuniorsController extends AppController {
         $this->layout = 'three-column';
       //  $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'news')));
       $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'news'),
+        'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type' => 'news'),
             'limit' =>4
             );
         
@@ -110,7 +110,7 @@ class JuniorsController extends AppController {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'sos')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'sos'),
+        'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type' => 'sos'),
             'limit' =>4
             );
         
@@ -124,7 +124,7 @@ class JuniorsController extends AppController {
         $this->layout = 'three-column';
        //$posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'advice')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'advice'),
+        'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type' => 'advice'),
             'limit' =>4
             );
         

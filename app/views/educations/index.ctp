@@ -1,4 +1,5 @@
 <?php
+//pr($posts);
 foreach ($posts as $post) {
 ?>
     <div class="sos_div content-div">
@@ -14,7 +15,7 @@ foreach ($posts as $post) {
                 <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                 <div class="inner-heading">
                     <div class="left">
-                        <p><?php echo $post['User']['name'];?></p>
+                        <p><?php echo $post['User']['username'];?></p>
                         <span><?php echo $post['User']['role'];?></span>
                     </div>
                     <div class="right">

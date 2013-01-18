@@ -2,7 +2,7 @@
 class FashionsController extends AppController {
     var $name = 'Fashions';
     var $components = array('Session','Authsome');
-    var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form','Js' => array('Jquery'),'Text');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';
     
@@ -85,7 +85,7 @@ class FashionsController extends AppController {
             $this->data['Post'] = $this->data['Fashion'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
-                $data['PostDetail']['type'] = 'advice';
+                $data['PostDetail']['type'] = 'expert advice';
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_to'] = 'fashion';
                 $data['PostDetail']['status'] = 'active';
@@ -98,7 +98,7 @@ class FashionsController extends AppController {
         $this->layout = 'three-column';
 //        $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion')));
          $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'fashion'),
+        'conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type !='=>'comment'),
         'limit' =>6
     );
       $posts = $this->paginate('Post');
@@ -151,12 +151,12 @@ class FashionsController extends AppController {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'advice')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'advice'),
+        'conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'expert advice'),
             'limit' =>4
             );
-        
+           
            $posts = $this->paginate('Post');
-
+           
         $this->set('posts', $posts);
         $this->set('type', 'advice');
     }
@@ -193,7 +193,20 @@ class FashionsController extends AppController {
         $this->redirect(array('action' => 'index'));
         
     }
-}
+    }
+    
+    public function add_beat(){
+        $this->layout = false;
+        $postId=$_POST['id'];
+        $details = $this->PostDetail->find('first', array('conditions' => array('post_id' => $postId)));
+        
+        $beats=$details['PostDetail']['heartbeats']+1;
+        $this->PostDetail->id = $details['PostDetail']['id'];
+        $this->PostDetail->saveField('heartbeats',$beats);
+        $this->set('id',$postId);
+        $this->set('beats',$beats);
+    }
+
 }
 
 ?>

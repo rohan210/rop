@@ -1,0 +1,1 @@
+<?php echo $this->Html->link('login', array('controller' => 'users', 'action' => 'login')); ?>

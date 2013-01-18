@@ -26,7 +26,7 @@
     <ul class="sf-menu">
         <li><?php echo $this->Html->link('SOS', array('action' => 'sos'), array('class' => 'pink')); ?></li>
         <li><?php echo $this->Html->link('news', array('action' => 'news')); ?></li>
-        <li class="active"><?php echo $this->Html->link('Discussions', array('action' => 'discussions')); ?></li>
+        <li><?php echo $this->Html->link('Discussions', array('action' => 'discussions')); ?></li>
         <li><?php echo $this->Html->link('Expert Advice', array('action' => 'expert_advice')); ?></li>
         <li><?php echo $this->Html->link('All', array('action' => 'index')); ?></li>
     </ul>

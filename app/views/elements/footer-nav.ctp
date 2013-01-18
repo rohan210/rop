@@ -9,7 +9,7 @@
     <li><a href="#">Events</a></li>
     <li><?php echo $this->Html->link('Health',array('controller'=>'healths','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Emotion',array('controller'=>'emotions','action'=>'index')); ?></li>
-    <li class="active"><?php echo $this->Html->link('Seniors',array('controller'=>'seniors','action'=>'index')); ?></li>
+    <li><?php echo $this->Html->link('Seniors',array('controller'=>'seniors','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Nature',array('controller'=>'natures','action'=>'index')); ?></li>
     <li><?php echo $this->Html->link('Juniors',array('controller'=>'juniors','action'=>'index')); ?></li>
 </ul>

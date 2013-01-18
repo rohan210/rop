@@ -1496,3 +1496,14 @@ h1.border {
           border-right: 0 none; }
         #pagewidth .two-col .main-menu ul :first-child a {
           border-left: 0 none; }
+
+        
+        /**EDIT**/
+        .like-back{    font-size: 10px;
+    margin-left: -80px;
+    margin-top: -13px;
+    position: absolute;
+    width: 71px;}
+        .like{
+            cursor: pointer;
+        }

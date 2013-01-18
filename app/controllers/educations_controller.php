@@ -1,7 +1,7 @@
 <?php
 class EducationsController extends AppController {
     var $name = 'Educations';
-    var $components = array('Auth','Session');
+    var $components = array('Authsome','Session');
     var $helpers = array('Html', 'Form');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';

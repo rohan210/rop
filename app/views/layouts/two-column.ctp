@@ -49,9 +49,13 @@
                     </div>
                     <div class="widget_195">
                         <div class="top-info">
+                        <?php if(Authsome::get()){ ?>
                             <?php echo $this->Html->image("small-profile.jpg"); ?>
                             <p><?php echo $this->Session->read('User.User.username'); ?></p>
                             <span><?php echo $this->Session->read('User.User.role'); ?></span>
+                            
+                                <?php echo $this->Html->link('logout', array('controller' => 'users', 'action' => 'logout')); ?>
+                        <?php } ?>    
                         </div>
                     </div>
                     <?php echo $content_for_layout ?>
@@ -83,7 +87,9 @@
             </div>
         </div>   
 
-
-        <?php echo $this->element('sql_dump'); ?>
+            
+        <?php
+        echo $this->Js->writeBuffer();
+        echo $this->element('sql_dump'); ?>
     </body>
 </html>
