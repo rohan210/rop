@@ -13,7 +13,7 @@
                 <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                 <div class="inner-heading">
                     <div class="left">
-                        <p><?php echo $post['User']['name'] ?></p>
+                        <p><?php echo $post['User']['username'] ?></p>
                         <span><?php echo $post['User']['role'] ?></span>
                     </div>
                     <div class="right">
@@ -51,7 +51,7 @@
                     <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                     <div class="inner-heading">
                         <div class="left">
-                            <p><?php echo $comment['User']['name']; ?>&nbsp<span>,<?php echo $comment['User']['role']; ?></span></p>
+                            <p><?php echo $comment['User']['username']; ?>&nbsp<span>,<?php echo $comment['User']['role']; ?></span></p>
 
                         </div>
                         <div class="right">
@@ -85,11 +85,11 @@
     ?>
     <div class="add-comment">
         <?php
-        $userId = Authsome::get('id');
+        
         echo $form->create('Comment', array('url' => array('controller' => 'fashions', 'action' => 'add_comment')));
         echo $form->hidden('post_id', array('value' => $post['Post']['id']));
         echo $form->hidden('topic', array('value' => $post['Post']['topic']));
-        echo $form->hidden('user_id', array('value' => $userId));
+        echo $form->hidden('user_id', array('value' => $this->Session->read('User.User.id')));
 
         echo $form->input('post', array('type' => 'textarea', 'div' => false, 'label' => false));
 

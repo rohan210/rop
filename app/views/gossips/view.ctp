@@ -13,7 +13,7 @@
                 <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                 <div class="inner-heading">
                     <div class="left">
-                        <p><?php echo $post['User']['name'] ?></p>
+                        <p><?php echo $post['User']['username'] ?></p>
                         <span><?php echo $post['User']['role'] ?></span>
                     </div>
                     <div class="right">
@@ -51,7 +51,7 @@
                     <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
                     <div class="inner-heading">
                         <div class="left">
-                            <p><?php echo $comment['User']['name'];?>&nbsp<span>,<?php echo $comment['User']['role'];?></span></p>
+                            <p><?php echo $comment['User']['username'];?>&nbsp<span>,<?php echo $comment['User']['role'];?></span></p>
 
                         </div>
                         <div class="right">

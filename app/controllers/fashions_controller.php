@@ -22,8 +22,8 @@ class FashionsController extends AppController {
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_to'] = 'fashion';
                 $data['PostDetail']['status'] = 'active';
-                pr($data);
-                //$this->PostDetail->save($data);
+                //pr($data);
+                $this->PostDetail->save($data);
             }
         }
     }
@@ -44,7 +44,7 @@ class FashionsController extends AppController {
                 
                 $data['PostDetail']['related_to'] = 'fashion';
                 $data['PostDetail']['status'] = 'active';
-                pr($data);
+               // pr($data);
                 $this->PostDetail->save($data);
             }
         }
