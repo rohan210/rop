@@ -5,12 +5,14 @@
         <title>ROP :: Index Page</title>
 
         <?php echo $this->Html->script('jquery'); ?>
+        <?php echo $this->Html->script('WEB_ROOT'.'js/ckeditor/ckeditor'); ?>
+
         <!-- Scripts -->
         <!--[if lt IE 9]>
         
         <?php echo $this->Html->css('ie'); ?>
         <?php echo $this->Html->script('modernizr'); ?>
-                    
+       <?php echo $this->Html->script('WEB_ROOT'.'js/ckeditor/ckeditor'); ?>
             <![endif]--> 	
         <?php echo $this->Html->css(array('reset', 'main', 'fonts/fonts', 'super-fish', 'responsive')); ?>
 

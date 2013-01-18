@@ -25,7 +25,9 @@
     </div>
     <div class="gray-buttons">
         <?php
-        echo $form->hidden('user_id', array('value' => $this->Session->read('Auth.User.id'), 'type' => 'textarea'));
+           
+        echo $form->hidden('user_id', array('value' => $this->Session->read('User.User.id')));
+
         echo $form->end(array('value'=>'create','class'=>'button','div'=>false));
         ?>
         
