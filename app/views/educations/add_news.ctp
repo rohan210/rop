@@ -1,5 +1,5 @@
 <div class="widget_804">
-    <h1>Add Discussion</h1>
+    <h1>Add News</h1>
     <div class="sos_div content-div">
         <?php echo $form->create('Education', array('action' => 'add_news')); ?>
         <div class="title">

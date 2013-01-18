@@ -2,9 +2,14 @@
 class NaturesController extends AppController {
     var $name = 'Natures';
     var $components = array('Authsome','Session');
-    var $helpers = array('Html', 'Form');
+    var $helpers = array('Html', 'Form','Js' => array('Jquery'),'Text');
     var $uses = array('Post', 'PostDetail');
     var $layout = 'two-column';
+    
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->set('type',"");
+    }
 
     public function add_discussion() {
         if (!empty($this->data)) {
@@ -34,10 +39,11 @@ public function add_comment() {
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_id'] = $this->data['Post']['post_id'];
                 
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'nature';
                 $data['PostDetail']['status'] = 'active';
                // pr($data);
                 $this->PostDetail->save($data);
+                $this->redirect(array('action' => 'view',$data['PostDetail']['related_id']));
             }
         }
     }
@@ -78,7 +84,7 @@ public function add_comment() {
             $this->data['Post'] = $this->data['Nature'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
-                $data['PostDetail']['type'] = 'advice';
+                $data['PostDetail']['type'] = 'expert advice';
                 $data['PostDetail']['post_id'] = $postId;
                 $data['PostDetail']['related_to'] = 'nature';
                 $data['PostDetail']['status'] = 'active';
@@ -91,7 +97,7 @@ public function add_comment() {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'nature')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'nature'),
+        'conditions' => array('PostDetail.related_to' => 'nature','PostDetail.type !='=>'comment'),
         'limit' =>6
     );
       $posts = $this->paginate('Post');
@@ -142,14 +148,14 @@ public function add_comment() {
         $this->layout = 'three-column';
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'nature','PostDetail.type' => 'advice')));
         $this->paginate = array(
-        'conditions' => array('PostDetail.related_to' => 'nature','PostDetail.type' => 'advice'),
+        'conditions' => array('PostDetail.related_to' => 'nature','PostDetail.type' => 'expert advice'),
             'limit' =>4
             );
         
            $posts = $this->paginate('Post');
 
         $this->set('posts', $posts);
-        $this->set('type', 'advice');
+        $this->set('type', 'expert advice');
     }
 
     public function view($id) {
