@@ -6,7 +6,7 @@
     <div class="sos_div content-div">
         <div class="title">
             <h2><?php echo $post['PostDetail']['type'];?></h2>
-            <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'gossips', 'action' => 'index'))); ?>
+            <?php //echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'gossips', 'action' => 'index'))); ?>
         </div>
         <div class="info">
             <div class="heading">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="content">
                             <p>
-                                <?php echo $comment['Post']['post'];?>
+                               <?php echo $comment['Comment']['comment'];?>
                             </p>
                         </div>
 

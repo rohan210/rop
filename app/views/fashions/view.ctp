@@ -5,7 +5,7 @@
 <div class="widget_804">
     <div class="sos_div content-div">
         <div class="title">
-            <h2><?php echo $post['PostDetail']['type'];?></h2>
+            <h2><?php echo $post['PostDetail']['type']; ?></h2>
             <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
         </div>
         <div class="info">
@@ -31,10 +31,29 @@
             <div class="option-menu">
                 <nav class="options">
                     <ul>
-                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => '#CommentComment')); ?></li>
 
                         <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
+                        <li><?php
+                $beats = $post['Heartbeat'];
+
+                function beat_check($beats, $userId) {
+                    foreach ($beats as $key => $beat) {
+                        if ($beat['user_id'] == $userId)
+                            return $userId;
+                    }
+                    return false;
+                }
+
+                $userBeat = beat_check($beats, $post['User']['id']);
+
+
+                if ($userBeat) {
+                    echo $this->Html->image("beat-on.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'image-swap'));
+                } else {
+                    echo $this->Html->image("beat-off.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'like target image-swap'));
+                }
+                ?></li><div class="like-back"></div>
                     </ul>
                 </nav>
 
@@ -59,7 +78,7 @@
                         </div>
                         <div class="content">
                             <p>
-                                <?php echo $comment['Post']['post']; ?>
+                                <?php echo $comment['Comment']['comment']; ?>
                             </p>
                         </div>
 
@@ -67,17 +86,7 @@
                 </div>
 
 
-                <div class="option-menu">
-                    <nav class="options">
-                        <ul>
-                            <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
 
-                            <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                            <li><?php echo $this->Html->image("like-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        </ul>
-                    </nav>
-
-                </div>
             </div>
         </div>
 
@@ -85,15 +94,40 @@
     ?>
     <div class="add-comment">
         <?php
-        
         echo $form->create('Comment', array('url' => array('controller' => 'fashions', 'action' => 'add_comment')));
         echo $form->hidden('post_id', array('value' => $post['Post']['id']));
-        echo $form->hidden('topic', array('value' => $post['Post']['topic']));
         echo $form->hidden('user_id', array('value' => $this->Session->read('User.User.id')));
-
-        echo $form->input('post', array('type' => 'textarea', 'div' => false, 'label' => false));
-
+        echo $form->hidden('type', array('value' => $post['PostDetail']['type']));
+        echo $form->input('comment', array('type' => 'textarea', 'div' => false, 'label' => false));
         echo $form->submit("Comment", array('class' => 'button', 'div' => false));
         ?>
     </div>
 </div>
+<script>
+    
+    $(document).ready(function(){
+        $('.like').click(function(){
+            var id =$(this).attr('id');
+            
+            var newDiv = $(this).parent().find('.like-back');
+            $.post("<?php echo $this->base; ?>/fashions/add_beat",{
+                data:{Heartbeat:{post_id:<?php echo $post['Post']['id']; ?>,user_id:<?php echo $post['User']['id']; ?>}}
+            },
+            function(data){
+                $(newDiv).html(data);
+                console.log(data)
+            }
+        );       
+        }
+    );
+        $(".image-swap").live('click', function() {
+            if ($(this).attr("class").indexOf("image-swap")>0) {
+                this.src = this.src.replace("-off","-on");
+            } else {
+                this.src = this.src.replace("-on","-off");
+            }
+            $(this).toggleClass("on");
+        });
+
+    });
+</script>

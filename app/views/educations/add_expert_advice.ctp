@@ -1,3 +1,7 @@
+<?php
+echo $this->Html->script('ckeditor/ckeditor');
+echo $this->Html->script('WEB_ROOT'.'js/ckeditor/ckeditor'); //Link the ckeditor.js file on the page you want to use the editor.
+?>
 <div class="widget_804">
     <h1>Add Expert Advice</h1>
     <div class="sos_div content-div">
@@ -19,7 +23,7 @@
         <div class="info">
             <div class="heading plain_textarea">
                 
-                <?php echo $form->input('post', array('type' => 'textarea', 'class' => 'height-233', 'div' => false, 'label' => false)); ?>
+                <?php echo $form->input('post', array('type' => 'textarea', 'id' => 'ckeditor', 'div' => false, 'label' => false)); ?>
             </div>
         </div>
     </div>
@@ -36,3 +40,7 @@
 
 
 </div>
+<script>
+CKEDITOR.replace( 'ckeditor',{
+    toolbar:'MyToolbar'} );
+</script>
