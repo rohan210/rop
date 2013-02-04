@@ -245,14 +245,36 @@ class FashionsController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
     }
-
-    public function add_beat() {
-        $this->layout = false;
-        if (!empty($this->data)) {
-
+    public function chkBeat()
+    {
+        $this->data['Heartbeat']['user_id']=101;
+        $this->data['Heartbeat']['post_id']=60;
+        $beatIs=$this->Heartbeat->find('first',array('conditions'=>array('post_id'=>$this->data['Heartbeat']['post_id'],'Heartbeat.user_id'=>$this->data['Heartbeat']['user_id'])));
+        if($beatIs){
+            $this->Heartbeat->delete($beatIs['Heartbeat']['id']);
+            $beats = $this->Heartbeat->find('count', array('conditions' => array('post_id' => $beatIs['Heartbeat']['post_id'])));
+            $this->set('beats', $beats);        
+            die(print_r($beats));
+        }else{
             $this->Heartbeat->save($this->data);
             $postId = $this->data['Heartbeat']['post_id'];
             $beats = $this->Heartbeat->find('count', array('conditions' => array('post_id' => $postId)));
+            $this->set('beats', $beats);
+            die(print_r($beats));  
+        }
+    }
+    public function add_beat() {
+        $this->layout = false;
+        if (!empty($this->data)) {
+            $beatIs=$this->Heartbeat->find('first',array('conditions'=>array('post_id'=>$this->data['Heartbeat']['post_id'],'Heartbeat.user_id'=>$this->data['Heartbeat']['user_id'])));
+            if($beatIs){
+                $this->Heartbeat->delete($beatIs['Heartbeat']['id']);  
+            }else{
+                $this->Heartbeat->save($this->data);
+                $postId = $this->data['Heartbeat']['post_id'];
+            }
+            
+            $beats = $this->Heartbeat->find('count', array('conditions' => array('post_id' => $this->data['Heartbeat']['post_id'])));
             $this->set('beats', $beats);
         }
     }

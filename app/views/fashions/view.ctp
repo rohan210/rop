@@ -45,11 +45,11 @@
                     return false;
                 }
 
-                $userBeat = beat_check($beats, $post['User']['id']);
-
+                $userBeat = beat_check($beats, $this->Session->read('User.User.id'));
+                
 
                 if ($userBeat) {
-                    echo $this->Html->image("beat-on.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'image-swap'));
+                    echo $this->Html->image("beat-on.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'like target image-swap on'));
                 } else {
                     echo $this->Html->image("beat-off.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'like target image-swap'));
                 }
@@ -106,28 +106,25 @@
 <script>
     
     $(document).ready(function(){
-        $('.like').click(function(){
+        $('.like').live('click',function(){
             var id =$(this).attr('id');
             
             var newDiv = $(this).parent().find('.like-back');
             $.post("<?php echo $this->base; ?>/fashions/add_beat",{
-                data:{Heartbeat:{post_id:<?php echo $post['Post']['id']; ?>,user_id:<?php echo $post['User']['id']; ?>}}
+                data:{Heartbeat:{post_id:<?php echo $post['Post']['id']; ?>,user_id:<?php echo $this->Session->read('User.User.id'); ?>}}
             },
             function(data){
                 $(newDiv).html(data);
-                console.log(data)
             }
         );       
-        }
-    );
-        $(".image-swap").live('click', function() {
-            if ($(this).attr("class").indexOf("image-swap")>0) {
-                this.src = this.src.replace("-off","-on");
-            } else {
+            
+            if ($(this).attr("class").indexOf("on")>0) {
                 this.src = this.src.replace("-on","-off");
+            } else {
+                this.src = this.src.replace("-off","-on");
             }
             $(this).toggleClass("on");
-        });
-
+        }
+    );
     });
 </script>
