@@ -4,7 +4,7 @@ class HomeController extends AppController {
 
     var $name = 'Home';
     var $components = array('Authsome', 'Session');
-    var $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Text');
+    var $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Text','Time');
     var $uses = array('Post', 'PostDetail', 'Comment', 'Heartbeat', 'Advice', 'Reply', 'User');
     var $layout = 'two-column';
 
@@ -16,12 +16,12 @@ class HomeController extends AppController {
     public function add_discussion() {
         if (!empty($this->data)) {
             $this->Post->create();
-            $this->data['Post'] = $this->data['Fashion'];
+            $this->data['Post'] = $this->data['Home'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'discussion';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'home';
                 $data['PostDetail']['status'] = 'active';
                 //pr($data);
                 $this->PostDetail->save($data);
@@ -46,20 +46,20 @@ class HomeController extends AppController {
     public function add_news() {
         if (!empty($this->data)) {
             //pr($this->data);
-            $fileOK = $this->uploadFiles('img/news', $this->data['Fashion']);
+            $fileOK = $this->uploadFiles('img/news', $this->data['Home']);
             // if file was uploaded ok
             if (array_key_exists('urls', $fileOK)) {
                 // save the url in the form data
-                $this->data['Fashion']['image_url'] = $fileOK['urls'][0];
+                $this->data['Home']['image_url'] = $fileOK['urls'][0];
             }
             pr($fileOK);
             $this->Post->create();
-            $this->data['Post'] = $this->data['Fashion'];
+            $this->data['Post'] = $this->data['Home'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'news';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'home';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -69,12 +69,12 @@ class HomeController extends AppController {
     public function add_sos() {
         if (!empty($this->data)) {
             $this->Post->create();
-            $this->data['Post'] = $this->data['Fashion'];
+            $this->data['Post'] = $this->data['Home'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'sos';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'home';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -84,12 +84,12 @@ class HomeController extends AppController {
     public function add_expert_advice() {
         if (!empty($this->data)) {
             $this->Post->create();
-            $this->data['Post'] = $this->data['Fashion'];
+            $this->data['Post'] = $this->data['Home'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'expert advice';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'home';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }
@@ -98,10 +98,10 @@ class HomeController extends AppController {
 
     public function index() {
         $this->layout = 'three-column';
-//        $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion')));
+//        $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home')));
         $this->paginate = array(
             
-            'limit' => 5
+            'limit' => 5,'order'=>array('Post.created DESC')
         );
         $posts = $this->paginate('Post');
         //pr($posts);
@@ -110,10 +110,10 @@ class HomeController extends AppController {
 
     public function discussions() {
         $this->layout = 'three-column';
-        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'discussion')));
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home','PostDetail.type' => 'discussion')));
         $this->paginate = array(
             'conditions' => array( 'PostDetail.type' => 'discussion'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -124,10 +124,10 @@ class HomeController extends AppController {
 
     public function news() {
         $this->layout = 'three-column';
-        //  $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'news')));
+        //  $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home','PostDetail.type' => 'news')));
         $this->paginate = array(
-            'conditions' => array('PostDetail.related_to' => 'fashion', 'PostDetail.type' => 'news'),
-            'limit' => 4
+            'conditions' => array('PostDetail.related_to' => 'home', 'PostDetail.type' => 'news'),
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -139,10 +139,10 @@ class HomeController extends AppController {
     public function SOS() {
 
         $this->layout = 'three-column';
-        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'sos')));
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home','PostDetail.type' => 'sos')));
         $this->paginate = array(
             'conditions' => array('PostDetail.type' => 'sos'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -174,10 +174,10 @@ class HomeController extends AppController {
 
     public function expert_advice() {
         $this->layout = 'three-column';
-        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'advice')));
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home','PostDetail.type' => 'advice')));
         $this->paginate = array(
             'conditions' => array('PostDetail.type' => 'expert advice'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -228,7 +228,7 @@ class HomeController extends AppController {
         if (!empty($this->data)) {
 
 
-            $this->data['Post'] = $this->data['Fashion'];
+            $this->data['Post'] = $this->data['Home'];
 
             if ($this->Post->save($this->data)) {
                 $this->Session->setFlash('Your post has been updated.');
@@ -299,9 +299,9 @@ class HomeController extends AppController {
     public function pink_me_ups() {
         
         $this->layout = 'three-column';
-        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'advice')));
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home','PostDetail.type' => 'advice')));
         $this->paginate = array(
-            'conditions' => array('PostDetail.related_to' => 'fashion', 'PostDetail.type' => 'pink up'),
+            'conditions' => array('PostDetail.related_to' => 'home', 'PostDetail.type' => 'pink up'),
             'limit' => 4
         );
 
@@ -333,12 +333,12 @@ class HomeController extends AppController {
     public function add_pink_me_up() {
         if (!empty($this->data)) {
             $this->Post->create();
-            $this->data['Post'] = $this->data['Fashion'];
+            $this->data['Post'] = $this->data['Home'];
             if ($this->Post->save($this->data)) {
                 $postId = $this->Post->getInsertId();
                 $data['PostDetail']['type'] = 'pink up';
                 $data['PostDetail']['post_id'] = $postId;
-                $data['PostDetail']['related_to'] = 'fashion';
+                $data['PostDetail']['related_to'] = 'home';
                 $data['PostDetail']['status'] = 'active';
                 $this->PostDetail->save($data);
             }

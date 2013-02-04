@@ -2,7 +2,7 @@
 class JuniorsController extends AppController {
     var $name = 'Juniors';
     var $components = array('Authsome','Session');
-    var $helpers = array('Html', 'Form','Js' => array('Jquery'),'Text');
+    var $helpers = array('Html', 'Form','Js' => array('Jquery'),'Text','Time');
     var $uses = array('Post', 'PostDetail', 'Comment', 'Heartbeat', 'Advice', 'Reply', 'User');
     var $layout = 'two-column';
     
@@ -88,7 +88,7 @@ class JuniorsController extends AppController {
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior')));
          $this->paginate = array(
         'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type !='=>'comment'),
-        'limit' =>6
+        'limit' =>6,'order'=>array('Post.created DESC')
     );
       $posts = $this->paginate('Post');
         $this->set('posts', $posts);
@@ -99,7 +99,7 @@ class JuniorsController extends AppController {
        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'discussion')));
         $this->paginate = array(
         'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type' => 'discussion'),
-            'limit' =>4
+            'limit' =>4,'order'=>array('Post.created DESC')
             );
         
            $posts = $this->paginate('Post');
@@ -113,7 +113,7 @@ class JuniorsController extends AppController {
       //  $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'news')));
       $this->paginate = array(
         'conditions' => array('PostDetail.related_to' => 'juniors','PostDetail.type' => 'news'),
-            'limit' =>4
+            'limit' =>4,'order'=>array('Post.created DESC')
             );
         
            $posts = $this->paginate('Post');
@@ -125,10 +125,10 @@ class JuniorsController extends AppController {
     public function SOS() {
 
         $this->layout = 'three-column';
-        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'sos')));
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'sos')));
         $this->paginate = array(
             'conditions' => array('PostDetail.related_to' => 'juniors', 'PostDetail.type' => 'sos'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -160,10 +160,10 @@ class JuniorsController extends AppController {
 
     public function expert_advice() {
         $this->layout = 'three-column';
-        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'advice')));
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'advice')));
         $this->paginate = array(
             'conditions' => array('PostDetail.related_to' => 'juniors', 'PostDetail.type' => 'expert advice'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -277,6 +277,70 @@ public function add_beat() {
             $this->Advice->save($this->data);
             $this->redirect(array('action' => 'view_advice', $this->data['Advice']['post_id']));
         }
+    }
+    public function pink_me_ups() {
+        
+        $this->layout = 'three-column';
+        // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'junior','PostDetail.type' => 'advice')));
+        $this->paginate = array(
+            'conditions' => array('PostDetail.related_to' => 'junior', 'PostDetail.type' => 'pink up'),
+            'limit' => 4
+        );
+
+        $posts = $this->paginate('Post');
+
+        $this->set('posts', $posts);
+        $this->set('type', 'pinkup');
+
+        $userIds = array();
+        foreach ($posts as $postData) {
+            if (!empty($postData['Reply'])) {
+                //print_r($postData['Reply']);
+                foreach ($postData['Reply'] as $repl) {
+                    $repUser = $repl['user_id'];
+                    if (!in_array($repUser, $userIds)) {
+                        $userIds[] = $repUser;
+                        $userData[$repUser] = $this->User->find('first', array('conditions' => array('User.id' => $repUser)));
+                    }
+                }
+            }
+        }
+        //pr($userIds);
+        //pr($userData);
+        if (!empty($userData)) {
+            $this->set('users', $userData);
+        }
+    }
+    
+    public function add_pink_me_up() {
+        if (!empty($this->data)) {
+            $this->Post->create();
+            $this->data['Post'] = $this->data['Junior'];
+            if ($this->Post->save($this->data)) {
+                $postId = $this->Post->getInsertId();
+                $data['PostDetail']['type'] = 'pink up';
+                $data['PostDetail']['post_id'] = $postId;
+                $data['PostDetail']['related_to'] = 'junior';
+                $data['PostDetail']['status'] = 'active';
+                $this->PostDetail->save($data);
+            }
+        }
+    }
+    
+    public function add_pink_me_up_reply() {
+        $this->render(false);
+        if (!empty($this->data)) {
+            $this->Reply->save($this->data);
+            $this->redirect(array('action' => 'view_pink_me_up', $this->data['Reply']['post_id']));
+        }
+    }
+    
+    public function view_pink_me_up($id) {
+        $post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
+        $this->set('post', $post);
+
+        $replies = $this->Reply->find('all', array('conditions' => array('post_id' => $id)));
+        $this->set('replies', $replies);
     }
 }
 

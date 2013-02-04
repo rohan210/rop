@@ -4,7 +4,7 @@ class PinkUpsController extends AppController {
 
     var $name = 'PinkUps';
     var $components = array('Authsome', 'Session');
-    var $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Text');
+    var $helpers = array('Html', 'Form', 'Js' => array('Jquery'), 'Text','Time');
     var $uses = array('Post', 'PostDetail', 'Comment', 'Heartbeat', 'Advice', 'Reply', 'User');
     var $layout = 'two-column';
 
@@ -18,7 +18,7 @@ class PinkUpsController extends AppController {
 
         $this->paginate = array(
             'conditions' => array('PostDetail.type' => 'pink up'),
-            'limit' => 5
+            'limit' => 5,'order'=>array('Post.created DESC')
         );
         $posts = $this->paginate('Post');
         //pr($posts);
