@@ -27,12 +27,14 @@
                 <p><?php echo $post['Post']['post']; ?></p>
 
             </div>
+            <div class="notification-div">
+                
 
             <div class="option-menu">
                 <nav class="options">
                     <ul>
                         <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => '#CommentComment')); ?></li>
-
+                        <li><?php echo $this->Html->image("icon-02.png", array("alt" => "view-icon",'class'=>'view target','title'=>$post['PostDetail']['total_views'], 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
                         <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
                         <li><?php
                 $beats = $post['Heartbeat'];
@@ -56,11 +58,13 @@
                 ?></li><div class="like-back"></div>
                     </ul>
                 </nav>
-
+            </div>
             </div>
         </div>
     </div>
-    <?php foreach ($comments as $comment) { ?>                       
+    <?php 
+    if(@$comments){
+    foreach ($comments as $comment) { ?>                       
         <div class="sos_div content-div">
             <div class="title">
                 <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
@@ -90,7 +94,7 @@
             </div>
         </div>
 
-    <?php }
+    <?php }}
     ?>
     <div class="add-comment">
         <?php
