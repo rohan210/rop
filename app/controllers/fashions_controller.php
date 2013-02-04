@@ -26,6 +26,7 @@ class FashionsController extends AppController {
                 //pr($data);
                 $this->PostDetail->save($data);
             }
+            $this->redirect(array('action' => 'view', $postId));
         }
     }
 
@@ -113,7 +114,7 @@ class FashionsController extends AppController {
         // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'discussion')));
         $this->paginate = array(
             'conditions' => array('PostDetail.related_to' => 'fashion', 'PostDetail.type' => 'discussion'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -127,7 +128,7 @@ class FashionsController extends AppController {
         //  $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'news')));
         $this->paginate = array(
             'conditions' => array('PostDetail.related_to' => 'fashion', 'PostDetail.type' => 'news'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -142,7 +143,7 @@ class FashionsController extends AppController {
         // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'sos')));
         $this->paginate = array(
             'conditions' => array('PostDetail.related_to' => 'fashion', 'PostDetail.type' => 'sos'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -177,7 +178,7 @@ class FashionsController extends AppController {
         // $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'fashion','PostDetail.type' => 'advice')));
         $this->paginate = array(
             'conditions' => array('PostDetail.related_to' => 'fashion', 'PostDetail.type' => 'expert advice'),
-            'limit' => 4
+            'limit' => 4,'order'=>array('Post.created DESC')
         );
 
         $posts = $this->paginate('Post');
@@ -215,8 +216,10 @@ class FashionsController extends AppController {
         $this->PostDetail->id = $post['PostDetail']['post_id'];
         $this->PostDetail->saveField('total_views', $views);
         $comments = $this->Comment->find('all', array('conditions' => array('post_id' => $id)));
+        
+        if(!empty($comments)){
         $this->set('comments', $comments);
-
+        }
         $beats = $this->Heartbeat->find('count', array('conditions' => array('post_id' => $id)));
         $this->set('beats', $beats);
     }

@@ -49,6 +49,13 @@ foreach ($posts as $post) {
                 
                 
             </div>
+            <div class="notification-div">
+                <ul class="counting">
+                                        <li><span><?php echo $comments=count($post['Comment']);?></span></li>
+                                        <li><span><?php echo $post['PostDetail']['total_views'];?></span></li>
+                                        <li><span><?php echo $post['PostDetail']['total_shares'];?></span></li>
+                                        <li><span><?php echo $beats=count($post['Heartbeat']); ?></span></li>
+                                    </ul>
             <div class="option-menu">
                 <nav class="options">
                     <ul>
@@ -65,11 +72,11 @@ foreach ($posts as $post) {
              ?></li>
                         <li><?php echo $this->Html->image("icon-02.png", array("alt" => "view-icon",'class'=>'view target','title'=>$post['PostDetail']['total_views'], 'url' => array('controller' => 'emotions', 'action' => 'index'))); ?></li>
                         <li><?php echo $this->Html->image("share-icon.png", array("alt" => "share-icon", 'url' => array('controller' => 'emotions', 'action' => 'index'))); ?></li>
-                        <li><?php $beats=count($post['Heartbeat']); echo $this->Html->image("like-icon.png", array('id' => $post['Post']['id'], "alt" => "beat-icon",'title'=>$beats, 'class' => 'like target'));?><div class="like-back"></div></li>
+                        <li><?php $beats=count($post['Heartbeat']); echo $this->Html->image("beat-off.png", array('id' => $post['Post']['id'], "alt" => "beat-icon",'title'=>$beats, 'class' => 'like target'));?><div class="like-back"></div></li>
                     
                     </ul>
                 </nav>
-
+            </div>
             </div>
         </div>
 
