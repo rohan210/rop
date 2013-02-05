@@ -1,1 +1,1 @@
-<?php echo $beats ?> beats
+<?php echo $beats ?>

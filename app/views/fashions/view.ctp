@@ -28,15 +28,20 @@
 
             </div>
             <div class="notification-div">
-                
 
-            <div class="option-menu">
-                <nav class="options">
-                    <ul>
-                        <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "profile", 'url' => '#CommentComment')); ?></li>
-                        <li><?php echo $this->Html->image("icon-02.png", array("alt" => "view-icon",'class'=>'view target','title'=>$post['PostDetail']['total_views'], 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php echo $this->Html->image("share-icon.png", array("alt" => "profile", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?></li>
-                        <li><?php
+                <ul class="counting">
+                    <li><span><?php echo $commentCount = count($post['Comment']); ?></span></li>
+                    <li><span><?php echo $post['PostDetail']['total_views']; ?></span></li>
+                    <li><span><?php echo $post['PostDetail']['total_shares']; ?></span></li>
+                    <li><span class="beat-counter"><?php echo $beats = count($post['Heartbeat']); ?></span></li>
+                </ul>
+                <div class="option-menu">
+                    <nav class="options">
+                        <ul>
+                            <li><?php echo $this->Html->image("comment-icon.png", array("alt" => "comments", 'url' => '#CommentComment')); ?></li>
+                            <li><?php echo $this->Html->image("icon-02.png", array("alt" => "view", 'class' => 'view', 'title' => $post['PostDetail']['total_views'])); ?></li>
+                            <li><?php echo $this->Html->image("share-icon.png", array("alt" => "share")); ?></li>
+                            <li><?php
                 $beats = $post['Heartbeat'];
 
                 function beat_check($beats, $userId) {
@@ -48,7 +53,7 @@
                 }
 
                 $userBeat = beat_check($beats, $this->Session->read('User.User.id'));
-                
+
 
                 if ($userBeat) {
                     echo $this->Html->image("beat-on.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'like target image-swap on'));
@@ -56,45 +61,48 @@
                     echo $this->Html->image("beat-off.png", array('id' => $post['Post']['id'], "alt" => "profile", 'title' => $beats, 'class' => 'like target image-swap'));
                 }
                 ?></li><div class="like-back"></div>
-                    </ul>
-                </nav>
-            </div>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
-    <?php 
-    if(@$comments){
-    foreach ($comments as $comment) { ?>                       
-        <div class="sos_div content-div">
-            <div class="title">
-                <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
-            </div>
-            <div class="info">
-                <div class="heading diff_heading">
-                    <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
-                    <div class="inner-heading">
-                        <div class="left">
-                            <p><?php echo $comment['User']['username']; ?>&nbsp<span>,<?php echo $comment['User']['role']; ?></span></p>
-
-                        </div>
-                        <div class="right">
-                            <span>1 hour ago</span>  
-                        </div>
-                        <div class="content">
-                            <p>
-                                <?php echo $comment['Comment']['comment']; ?>
-                            </p>
-                        </div>
-
-                    </div>
+    <?php
+    if (isset($comments)) {
+        foreach ($comments as $comment) {
+            ?>                       
+            <div class="sos_div content-div">
+                <div class="title">
+                    <?php echo $this->Html->image("drop-down.png", array("alt" => "drop", 'url' => array('controller' => 'fashions', 'action' => 'index'))); ?>
                 </div>
+                <div class="info">
+                    <div class="heading diff_heading">
+                        <?php echo $this->Html->image("center-profile-pic.jpg"); ?>
+                        <div class="inner-heading">
+                            <div class="left">
+                                <p><?php echo $comment['User']['username']; ?>&nbsp<span>,<?php echo $comment['User']['role']; ?></span></p>
+
+                            </div>
+                            <div class="right">
+                                <span>1 hour ago</span>  
+                            </div>
+                            <div class="content">
+                                <p>
+                                    <?php echo $comment['Comment']['comment']; ?>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
 
 
 
+                </div>
             </div>
-        </div>
 
-    <?php }}
+        <?php
+        }
+    }
     ?>
     <div class="add-comment">
         <?php
@@ -113,12 +121,12 @@
         $('.like').live('click',function(){
             var id =$(this).attr('id');
             
-            var newDiv = $(this).parent().find('.like-back');
+            
             $.post("<?php echo $this->base; ?>/fashions/add_beat",{
                 data:{Heartbeat:{post_id:<?php echo $post['Post']['id']; ?>,user_id:<?php echo $this->Session->read('User.User.id'); ?>}}
             },
             function(data){
-                $(newDiv).html(data);
+                $(".beat-counter").html(data);
             }
         );       
             

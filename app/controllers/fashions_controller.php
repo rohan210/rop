@@ -235,7 +235,53 @@ class FashionsController extends AppController {
 
             if ($this->Post->save($this->data)) {
                 $this->Session->setFlash('Your post has been updated.');
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'view',$this->data['Post']['id']));
+            }
+        }
+    }
+    public function edit_news($id = null) {
+        $post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
+        //pr($post);
+        $this->set('post', $post);
+        if (!empty($this->data)) {
+
+
+            $this->data['Post'] = $this->data['Fashion'];
+
+            if ($this->Post->save($this->data)) {
+                $this->Session->setFlash('Your post has been updated.');
+                $this->redirect(array('action' => 'view',$this->data['Post']['id']));
+            }
+        }
+    }
+    public function edit_sos($id = null) {
+        $post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
+        //pr($post);
+        $this->set('post', $post);
+        if (!empty($this->data)) {
+
+
+            $this->data['Post'] = $this->data['Fashion'];
+
+            if ($this->Post->save($this->data)) {
+                $this->Session->setFlash('Your post has been updated.');
+                $this->redirect(array('action' => 'view_sos',$this->data['Post']['id']));
+            }
+        }
+    }
+    
+    public function edit_expert_advice($id = null) {
+        $post = $this->Post->find('first', array('conditions' => array('Post.id' => $id)));
+        //pr($post);
+        $this->set('post', $post);
+        if (!empty($this->data)) {
+
+
+            $this->data['Post'] = $this->data['Fashion'];
+
+            if ($this->Post->save($this->data)) {
+                $this->Session->setFlash('Your post has been updated.');
+                $this->redirect(array('action' => 'view_advice',$this->data['Post']['id']));
             }
         }
     }
@@ -248,24 +294,7 @@ class FashionsController extends AppController {
             $this->redirect(array('action' => 'index'));
         }
     }
-    public function chkBeat()
-    {
-        $this->data['Heartbeat']['user_id']=101;
-        $this->data['Heartbeat']['post_id']=60;
-        $beatIs=$this->Heartbeat->find('first',array('conditions'=>array('post_id'=>$this->data['Heartbeat']['post_id'],'Heartbeat.user_id'=>$this->data['Heartbeat']['user_id'])));
-        if($beatIs){
-            $this->Heartbeat->delete($beatIs['Heartbeat']['id']);
-            $beats = $this->Heartbeat->find('count', array('conditions' => array('post_id' => $beatIs['Heartbeat']['post_id'])));
-            $this->set('beats', $beats);        
-            die(print_r($beats));
-        }else{
-            $this->Heartbeat->save($this->data);
-            $postId = $this->data['Heartbeat']['post_id'];
-            $beats = $this->Heartbeat->find('count', array('conditions' => array('post_id' => $postId)));
-            $this->set('beats', $beats);
-            die(print_r($beats));  
-        }
-    }
+    
     public function add_beat() {
         $this->layout = false;
         if (!empty($this->data)) {
@@ -384,6 +413,24 @@ class FashionsController extends AppController {
 
         $replies = $this->Reply->find('all', array('conditions' => array('post_id' => $id)));
         $this->set('replies', $replies);
+    }
+    
+    public function sos_useful(){
+        $this->layout=false;
+        if(!empty($this->data)){
+        if($this->data['Reply']['useful']=="yes"){
+            
+            $this->Reply->id=$this->data['Reply']['reply_id'];
+            $this->Reply->saveField('useful','yes');
+            
+            
+        }
+        else{
+            $this->Reply->id=$this->data['Reply']['reply_id'];
+            $this->Reply->saveField('useful','no');
+        }
+        
+    }
     }
 }
 

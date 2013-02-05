@@ -949,7 +949,7 @@ h1.border {
                   margin: 0 0 3px; }
                   #pagewidth .two-col .right-col .widget_577 .sos_div .info .notification-div .counting li span {
                     float: right;
-                    width: 25px;
+                    width: 20px;
                     text-align: right;
                     background: #f9d5e3;
                     color: #ff53a2;
@@ -1668,4 +1668,104 @@ h1.border {
         .like{
             cursor: pointer;
         }
-        
+        #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div {
+              position: absolute;
+              float: right;
+              width: 6.67%;
+              right: -4px;
+              top: 9%; }
+              #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .counting {
+                float: left;
+                margin: 0;
+                position: absolute;
+                right: 30px;
+                top: 5px; }
+                #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .counting li {
+                  float: right;
+                  width: 100%;
+                  margin: 0 0 5px; }
+                  #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .counting li span {
+                    float: right;
+                    width: 25px;
+                    text-align: right;
+                    background: #f9d5e3;
+                    color: #ff53a2;
+                    font-size: 11px;
+                    font-family: open_sansregular,Verdana;
+                    padding: 3px 6px;
+                    -webkit-border-radius: 6px 0px 0px 6px;
+                    border-radius: 6px 0px 0px 6px; }
+              #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu {
+                /*height:102px;*/
+                position: absolute;
+                background: url("../images/option-bottom.png") no-repeat scroll right bottom;
+                float: right;
+                width: 62%;
+                right: -4px;
+                top: 9%;
+                /* span{float:right;width:4px;height:5px;position:absolute;bottom:0;
+                        img{float:left;} 
+                    }*/ }
+                #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options {
+                  display: inline-block;
+                  width: 100%;
+                  background: #fe56a1;
+                  -webkit-border-radius: 5px 0px 0px 5px;
+                  border-radius: 5px 0px 0px 5px;
+                  /* .text{backgroud:#fad3e4;} */ }
+                  #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul {
+                    float: left;
+                    margin: 11% 0 17%; }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul li {
+                      padding: 21% 1% 4%;
+                      border-bottom: 1px solid #db337e;
+                      border-top: 1px solid #f978b1;
+                      margin: 0 14%;
+                      text-align: center;
+                      /* .points{display:none;
+                                           li{float:left;width:72%;
+                                               a{width:auto;color:#fff;float:left;
+                                                   span{width:auto;float:left;height:auto;top:0;}
+                                                }
+                                           }
+                                       } */ }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul :hover > ul {
+                      display: block;
+                      position: absolute;
+                      float: left;
+                      background-color: #FDECF3;
+                      left: -5px;
+                      top: 5px; }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul :hover > ul li {
+                      background: #FDECF3;
+                      float: left;
+                      padding: 0; }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul :hover > ul li a {
+                      width: auto;
+                      color: #000;
+                      text-align: right;
+                      float: left; }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul :hover > ul li a span {
+                      float: left;
+                      position: relative; }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul li:last-child {
+                      border-bottom: 0 none; }
+                    #pagewidth .two-col .right-col .widget_804 .sos_div .info .notification-div .option-menu .options ul li:first-child {
+                      border-top: 0 none; }
+                    
+                    .helpful{
+                        float: right;
+                    }
+                    .helpful li{
+                            clear: left;
+    float: left;
+    line-height: 20px;
+    margin-bottom: 5px;
+    width: 42px;
+                    }
+                    .helpful li span{
+                        float: right;
+                    }
+                    .message{
+                        float: left;
+                    }

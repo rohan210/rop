@@ -99,8 +99,9 @@ class HomeController extends AppController {
     public function index() {
         $this->layout = 'three-column';
 //        $posts = $this->Post->find('all', array('conditions' => array('PostDetail.related_to' => 'home')));
+        $communities=array('fashion','education');
         $this->paginate = array(
-            
+            'conditions'=>array('PostDetail.related_to'=>$communities),
             'limit' => 5,'order'=>array('Post.created DESC')
         );
         $posts = $this->paginate('Post');
